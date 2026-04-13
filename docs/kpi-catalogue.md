@@ -26,11 +26,11 @@ separate TBL panel in the UI.
 
 | #  | KPI                       | Dimension  | Unit           | Viz hint     | API route                         |
 |----|---------------------------|------------|----------------|--------------|-----------------------------------|
-| 9  | CO₂ Emission Reduction    | Ecological | tons/year      | `number`     | `/api/graphdb/extension-kpis`     |
-| 10 | Recycling Rate            | Ecological | %              | `percentage` | `/api/graphdb/extension-kpis`     |
-| 11 | Material Reuse Rate       | Ecological | %              | `percentage` | `/api/graphdb/extension-kpis`     |
-| 12 | Circular Revenue Share    | Economic   | % of revenue   | `percentage` | `/api/graphdb/extension-kpis`     |
-| 13 | Jobs Created              | Social     | FTE            | `number`     | `/api/graphdb/extension-kpis`     |
+| 8  | CO₂ Emission Reduction    | Ecological | tons/year      | `number`     | `/api/graphdb/extension-kpis`     |
+| 9 | Recycling Rate            | Ecological | %              | `percentage` | `/api/graphdb/extension-kpis`     |
+| 10 | Material Reuse Rate       | Ecological | %              | `percentage` | `/api/graphdb/extension-kpis`     |
+| 11 | Circular Revenue Share    | Economic   | % of revenue   | `percentage` | `/api/graphdb/extension-kpis`     |
+| 12 | Jobs Created              | Social     | FTE            | `number`     | `/api/graphdb/extension-kpis`     |
 
 ## Extension schema
 
