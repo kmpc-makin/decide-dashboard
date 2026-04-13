@@ -1,15 +1,15 @@
 # KPI Catalogue
 
-The DECIDE Monitoring Dashboard displays 13 KPIs organised in two sections.
+The DECIDE Monitoring Dashboard displays 12 KPIs organised in two sections.
 Section A indicators are derived automatically from the DECIDE toolbox models
 (BMC, e3Value, BPMN). Section B indicators are reported by pilot owners and
 stored in a dedicated `<kpi-extension>` named graph.
 
-KPI 8 (Triple Bottom Line Scorecard) is realised through the five Section B
+KPI X (Triple Bottom Line Scorecard) is realised through the five Section B
 indicators distributed across the three dimension sections, so there is no
 separate TBL panel in the UI.
 
-## Section A - Toolbox-derived (8)
+## Section A - Toolbox-derived (7)
 
 | #  | KPI                              | Dimension        | Source model           | API route                          |
 |----|----------------------------------|------------------|------------------------|------------------------------------|
@@ -20,7 +20,7 @@ separate TBL panel in the UI.
 | 5  | Circularity Penetration Score    | Ecological       | BPMN                   | pending (needs activity tagging)   |
 | 6  | Waste Hotspots & Opportunities   | Ecological       | BPMN                   | pending (needs activity tagging)   |
 | 7  | Actor Consistency Check          | Cross (meta)     | Federated BMC+BPMN+e3V | pending (needs federated query)    |
-| 8  | Triple Bottom Line Scorecard     | All three        | System Dynamics / agg. | implemented via Section B KPIs     |
+| X  | Triple Bottom Line Scorecard     | All three        | System Dynamics / agg. | implemented via Section B KPIs     |
 
 ## Section B - Pilot-reported (5)
 
