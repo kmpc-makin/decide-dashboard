@@ -1,0 +1,137 @@
+@prefix cebm: <http://example.org/cebm#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================================
+# CEBM Ontology Extension - Generic Pilot-Reported KPIs
+#
+# This extension allows pilot owners to attach arbitrary reporting KPIs to a
+# business model without modifying the core DECIDE ontology. All instances
+# defined here live in a dedicated named graph so they remain cleanly
+# separated from the toolbox-derived triples.
+#
+#   Target named graph: <http://example.org/cebm/kpi-extension>
+#
+# Only four properties are required per KPI. The schema is intentionally
+# minimal: there are no target values, benchmark scales, or AS-IS / TO-BE
+# states, because those datasets are not collected reliably across pilots.
+# =============================================================================
+
+
+# --- Class ------------------------------------------------------------------
+
+cebm:ExtensionKPI a owl:Class ;
+    rdfs:label "Extension KPI" ;
+    rdfs:comment
+        "A pilot-reported key performance indicator that is not derived from "
+        "BMC, e3Value, BPMN or System Dynamics models, but entered manually "
+        "by the pilot owner or project partner." .
+
+
+# --- Required properties ----------------------------------------------------
+
+cebm:forBusinessModel a owl:ObjectProperty ;
+    rdfs:label "for business model" ;
+    rdfs:comment "Links the extension KPI to its CEBM." ;
+    rdfs:domain cebm:ExtensionKPI ;
+    rdfs:range cebm:BusinessModel .
+
+cebm:hasTitle a owl:DatatypeProperty ;
+    rdfs:label "title" ;
+    rdfs:comment "Human-readable name of the KPI, e.g. 'Recycling Rate'." ;
+    rdfs:range xsd:string .
+
+cebm:hasDimension a owl:ObjectProperty ;
+    rdfs:label "dimension" ;
+    rdfs:comment
+        "TBL dimension the KPI belongs to. Expected values: cebm:Ecological, "
+        "cebm:Economic, cebm:Social." .
+
+cebm:performanceValue a owl:DatatypeProperty ;
+    rdfs:label "value" ;
+    rdfs:comment "Numeric measurement value." ;
+    rdfs:range xsd:decimal .
+
+cebm:hasUnit a owl:DatatypeProperty ;
+    rdfs:label "unit" ;
+    rdfs:comment "Measurement unit, e.g. '%', 'tons/year', 'FTE'." ;
+    rdfs:range xsd:string .
+
+
+# --- Optional property ------------------------------------------------------
+
+cebm:hasVisualizationHint a owl:DatatypeProperty ;
+    rdfs:label "visualization hint" ;
+    rdfs:comment
+        "Optional rendering hint for the dashboard. Expected values: "
+        "'number' (default) or 'percentage'. Percentages are drawn with a "
+        "0-100 scale indicator; numbers are displayed as a single value with "
+        "unit." ;
+    rdfs:range xsd:string .
+
+
+# --- TBL dimension individuals ---------------------------------------------
+
+cebm:Ecological a owl:NamedIndividual ;
+    rdfs:label "Ecological" .
+
+cebm:Economic a owl:NamedIndividual ;
+    rdfs:label "Economic" .
+
+cebm:Social a owl:NamedIndividual ;
+    rdfs:label "Social" .
+
+
+# =============================================================================
+# Example instances - Whey pilot case
+#
+# The values below are placeholders for illustration. Pilot owners replace
+# the numeric values during data collection; the structure stays the same.
+# =============================================================================
+
+<http://example.org/cebm/kpi-extension/whey_co2_reduction>
+    a cebm:ExtensionKPI ;
+    cebm:forBusinessModel <http://example.org/cebm/whey_enterprise> ;
+    cebm:hasTitle           "CO₂ Emission Reduction" ;
+    cebm:hasDimension       cebm:Ecological ;
+    cebm:performanceValue   "2400"^^xsd:decimal ;
+    cebm:hasUnit            "tons/year" ;
+    cebm:hasVisualizationHint "number" .
+
+<http://example.org/cebm/kpi-extension/whey_recycling_rate>
+    a cebm:ExtensionKPI ;
+    cebm:forBusinessModel <http://example.org/cebm/whey_enterprise> ;
+    cebm:hasTitle           "Recycling Rate" ;
+    cebm:hasDimension       cebm:Ecological ;
+    cebm:performanceValue   "72"^^xsd:decimal ;
+    cebm:hasUnit            "%" ;
+    cebm:hasVisualizationHint "percentage" .
+
+<http://example.org/cebm/kpi-extension/whey_material_reuse_rate>
+    a cebm:ExtensionKPI ;
+    cebm:forBusinessModel <http://example.org/cebm/whey_enterprise> ;
+    cebm:hasTitle           "Material Reuse Rate" ;
+    cebm:hasDimension       cebm:Ecological ;
+    cebm:performanceValue   "58"^^xsd:decimal ;
+    cebm:hasUnit            "%" ;
+    cebm:hasVisualizationHint "percentage" .
+
+<http://example.org/cebm/kpi-extension/whey_circular_revenue_share>
+    a cebm:ExtensionKPI ;
+    cebm:forBusinessModel <http://example.org/cebm/whey_enterprise> ;
+    cebm:hasTitle           "Circular Revenue Share" ;
+    cebm:hasDimension       cebm:Economic ;
+    cebm:performanceValue   "42"^^xsd:decimal ;
+    cebm:hasUnit            "%" ;
+    cebm:hasVisualizationHint "percentage" .
+
+<http://example.org/cebm/kpi-extension/whey_jobs_created>
+    a cebm:ExtensionKPI ;
+    cebm:forBusinessModel <http://example.org/cebm/whey_enterprise> ;
+    cebm:hasTitle           "Jobs Created" ;
+    cebm:hasDimension       cebm:Social ;
+    cebm:performanceValue   "12"^^xsd:decimal ;
+    cebm:hasUnit            "FTE" ;
+    cebm:hasVisualizationHint "number" .
