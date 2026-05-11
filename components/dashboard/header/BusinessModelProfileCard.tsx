@@ -6,34 +6,22 @@ import { Chip } from '@heroui/chip';
 import { Spinner } from '@heroui/spinner';
 import { IdCard, MapPin, Layers, Shield, Recycle } from 'lucide-react';
 import { useGraphDBProfile } from '@/lib/hooks/useGraphDB';
+import { WHEY_PROFILE } from '@/lib/mock/whey-kpis';
 
 interface BusinessModelProfileCardProps {
   businessModelUri: string;
-  isMock?: boolean;
+  isWhey?: boolean;
 }
-
-const MOCK_PROFILE = {
-  uri: 'mock:decide-demo-cebm',
-  label: 'Whey Enterprise (Demo)',
-  cebmType: 'Cycling',
-  sector: 'Food',
-  region: 'Danube Region',
-  maturityLevel: 'Prototype',
-  strategies: ['Repurpose', 'Recycle'],
-  valuePropositions: ['Insect protein from brewery spent grain'],
-  customerSegments: ['Fish farms', 'Pet food companies'],
-  keyPartners: ['Brewery', 'Municipality'],
-};
 
 /** KPI 1 - Business Model Profile Card. */
 export default function BusinessModelProfileCard({
   businessModelUri,
-  isMock = false,
+  isWhey = false,
 }: BusinessModelProfileCardProps) {
   const { profile: liveProfile, isLoading } = useGraphDBProfile(
-    isMock ? null : businessModelUri,
+    isWhey ? null : businessModelUri,
   );
-  const profile = isMock ? MOCK_PROFILE : liveProfile;
+  const profile = isWhey ? WHEY_PROFILE : liveProfile;
 
   return (
     <motion.div

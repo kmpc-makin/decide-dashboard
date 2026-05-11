@@ -8,6 +8,10 @@ import { ArrowRightLeft } from 'lucide-react';
 import { useGraphDBValueExchanges } from '@/lib/hooks/useGraphDB';
 import DistributionBar from '../../DistributionBar';
 import SectionBadge from '../SectionBadge';
+import {
+  WHEY_VALUE_EXCHANGES,
+  isWheyProteinModel,
+} from '@/lib/mock/whey-kpis';
 
 interface ValueExchangesCardProps {
   businessModelUri: string;
@@ -24,7 +28,11 @@ function formatCurrency(value: number): string {
 export default function ValueExchangesCard({
   businessModelUri,
 }: ValueExchangesCardProps) {
-  const { exchanges, isLoading } = useGraphDBValueExchanges(businessModelUri);
+  const isWhey = isWheyProteinModel(businessModelUri);
+  const { exchanges: liveExchanges, isLoading } = useGraphDBValueExchanges(
+    isWhey ? null : businessModelUri,
+  );
+  const exchanges = isWhey ? WHEY_VALUE_EXCHANGES : liveExchanges;
 
   const maxAmount = Math.max(...exchanges.map((e) => e.amount), 1);
   const totalAmount = exchanges.reduce((sum, e) => sum + e.amount, 0);

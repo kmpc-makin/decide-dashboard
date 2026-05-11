@@ -15,10 +15,11 @@ import {
 } from 'lucide-react';
 import { useGraphDBActorEcosystem } from '@/lib/hooks/useGraphDB';
 import type { Actor } from '@/lib/sparql/queries';
+import { WHEY_ECOSYSTEM } from '@/lib/mock/whey-kpis';
 
 interface ActorEcosystemCardProps {
   businessModelUri: string;
-  isMock?: boolean;
+  isWhey?: boolean;
 }
 
 const ROLE_META: Record<
@@ -41,26 +42,14 @@ const ROLE_ORDER: Actor['role'][] = [
 ];
 
 /** KPI 2 - Actor Ecosystem Map. Actors grouped by role. */
-const MOCK_ECOSYSTEM = {
-  actors: [
-    { uri: 'mock:brewery', name: 'Brewery', role: 'supplier' as const },
-    { uri: 'mock:municipality', name: 'Municipality', role: 'partner' as const },
-    { uri: 'mock:fishfarm', name: 'Fish Farm', role: 'customer' as const },
-    { uri: 'mock:petfood', name: 'Pet Food Co.', role: 'customer' as const },
-    { uri: 'mock:logistics', name: 'Logistics Provider', role: 'supplier' as const },
-    { uri: 'mock:workforce', name: 'Plant Operators', role: 'workforce' as const },
-  ],
-  totalCount: 6,
-};
-
 export default function ActorEcosystemCard({
   businessModelUri,
-  isMock = false,
+  isWhey = false,
 }: ActorEcosystemCardProps) {
   const { ecosystem: liveEcosystem, isLoading } = useGraphDBActorEcosystem(
-    isMock ? null : businessModelUri,
+    isWhey ? null : businessModelUri,
   );
-  const ecosystem = isMock ? MOCK_ECOSYSTEM : liveEcosystem;
+  const ecosystem = isWhey ? WHEY_ECOSYSTEM : liveEcosystem;
 
   const grouped = (ecosystem?.actors ?? []).reduce<
     Record<Actor['role'], Actor[]>

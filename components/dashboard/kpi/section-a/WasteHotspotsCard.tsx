@@ -4,19 +4,22 @@ import { motion } from 'framer-motion';
 import { Card, CardBody } from '@heroui/card';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 import SectionBadge from '../SectionBadge';
-import { WHEY_MOCK, isMockModel } from '@/lib/mock/whey-kpis';
+import {
+  WHEY_WASTE_HOTSPOTS,
+  isWheyProteinModel,
+} from '@/lib/mock/whey-kpis';
 
 interface WasteHotspotsCardProps {
   businessModelUri: string;
 }
 
-/** KPI 6 - Waste Hotspots. Mock data for demo CEBM, pending state for real models. */
+/** KPI 6 - Waste Hotspots. */
 export default function WasteHotspotsCard({
   businessModelUri,
 }: WasteHotspotsCardProps) {
-  const isMock = isMockModel(businessModelUri);
+  const isWhey = isWheyProteinModel(businessModelUri);
 
-  if (!isMock) {
+  if (!isWhey) {
     return (
       <Card
         isBlurred
@@ -42,7 +45,7 @@ export default function WasteHotspotsCard({
     );
   }
 
-  const hotspots = WHEY_MOCK.wasteHotspots;
+  const hotspots = WHEY_WASTE_HOTSPOTS;
 
   return (
     <motion.div
@@ -61,7 +64,7 @@ export default function WasteHotspotsCard({
             <AlertTriangle className="w-3.5 h-3.5" />
             Ecological
           </span>
-          <SectionBadge type="pending" />
+          <SectionBadge type="A" />
         </div>
         <CardBody className="gap-2">
           <h3 className="text-sm font-semibold text-foreground">

@@ -21,33 +21,29 @@ import ExtensionKPICard from './kpi/section-b/ExtensionKPICard';
 
 import type { GraphDBBusinessModel } from '@/lib/sparql/queries';
 import { useGraphDBExtensionKPIs } from '@/lib/hooks/useGraphDB';
-import { WHEY_MOCK, isMockModel } from '@/lib/mock/whey-kpis';
+import {
+  WHEY_PROTEIN_ENTRY,
+  WHEY_EXTENSION_KPIS,
+  isWheyProteinModel,
+} from '@/lib/mock/whey-kpis';
 
-/**
- * Main dashboard shell. When no CEBM is selected, it only renders the
- * aggregated catalogue view. When a model is selected, the header,
- * dimension filter and three TBL dimension sections become visible.
- */
 export default function KPIDashboard() {
-  const [selected, setSelected] = useState<GraphDBBusinessModel | null>(null);
+  const [selected, setSelected] = useState<GraphDBBusinessModel | null>(
+    WHEY_PROTEIN_ENTRY as GraphDBBusinessModel,
+  );
   const [dimensions, setDimensions] = useState<KPICategory[]>([
     'ecological',
     'economic',
     'social',
   ]);
 
-  const isMock = isMockModel(selected?.uri ?? null);
+  const isWhey = isWheyProteinModel(selected?.uri ?? null);
 
-  // Only fetch from GraphDB when a real model is selected.
   const { kpis: extensionKpis, isError: extensionError } =
-    useGraphDBExtensionKPIs(isMock ? null : (selected?.uri ?? null));
+    useGraphDBExtensionKPIs(isWhey ? null : (selected?.uri ?? null));
 
-  // Mock data is shown exclusively for the synthetic demo entry.
-  // Real models show only what the data platform actually returns.
-  const effectiveExtensionKpis = isMock
-    ? WHEY_MOCK.extensionKpis
-    : extensionKpis;
-  const extensionPending = !isMock && extensionKpis.length === 0;
+  const effectiveExtensionKpis = isWhey ? WHEY_EXTENSION_KPIS : extensionKpis;
+  const extensionPending = !isWhey && extensionKpis.length === 0;
 
   const toggle = (dim: KPICategory) =>
     setDimensions((prev) =>

@@ -8,7 +8,7 @@ import { Spinner } from '@heroui/spinner';
 import { Database, ChevronDown, MapPin } from 'lucide-react';
 import { useGraphDBBusinessModels } from '@/lib/hooks/useGraphDB';
 import type { GraphDBBusinessModel } from '@/lib/sparql/queries';
-import { MOCK_MODEL_ENTRY, isMockModel } from '@/lib/mock/whey-kpis';
+import { WHEY_PROTEIN_ENTRY } from '@/lib/mock/whey-kpis';
 
 interface BusinessModelSelectorProps {
   selected: GraphDBBusinessModel | null;
@@ -25,7 +25,7 @@ export default function BusinessModelSelector({
 
   // Prepend the synthetic mock entry so it always appears first.
   const allModels: GraphDBBusinessModel[] = [
-    MOCK_MODEL_ENTRY as GraphDBBusinessModel,
+    WHEY_PROTEIN_ENTRY as GraphDBBusinessModel,
     ...models,
   ];
 

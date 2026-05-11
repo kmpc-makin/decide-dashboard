@@ -4,19 +4,19 @@ import { motion } from 'framer-motion';
 import { Card, CardBody } from '@heroui/card';
 import { Recycle } from 'lucide-react';
 import SectionBadge from '../SectionBadge';
-import { WHEY_MOCK, isMockModel } from '@/lib/mock/whey-kpis';
+import { WHEY_CIRCULARITY, isWheyProteinModel } from '@/lib/mock/whey-kpis';
 
 interface CircularityPenetrationCardProps {
   businessModelUri: string;
 }
 
-/** KPI 5 - Circularity Penetration Score. Mock data for demo CEBM, pending state for real models. */
+/** KPI 5 - Circularity Penetration Score. */
 export default function CircularityPenetrationCard({
   businessModelUri,
 }: CircularityPenetrationCardProps) {
-  const isMock = isMockModel(businessModelUri);
+  const isWhey = isWheyProteinModel(businessModelUri);
 
-  if (!isMock) {
+  if (!isWhey) {
     return (
       <Card
         isBlurred
@@ -42,8 +42,7 @@ export default function CircularityPenetrationCard({
     );
   }
 
-  const { percentage, circularActivities, totalActivities } =
-    WHEY_MOCK.circularityPenetration;
+  const { percentage, circularActivities, totalActivities } = WHEY_CIRCULARITY;
 
   return (
     <motion.div
@@ -62,7 +61,7 @@ export default function CircularityPenetrationCard({
             <Recycle className="w-3.5 h-3.5" />
             Ecological
           </span>
-          <SectionBadge type="pending" />
+          <SectionBadge type="A" />
         </div>
         <CardBody className="gap-2">
           <h3 className="text-sm font-semibold text-foreground">
